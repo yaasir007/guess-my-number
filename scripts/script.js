@@ -9,27 +9,31 @@ const message = document.querySelector('.message');
 
 let score = 20;
 let secretNumber = Math.trunc(Math.random()*20)+1;
-// myNumber.textContent = secretNumber;
+myNumber.textContent = secretNumber;
+
+const displayInformation = (outputText) => {
+  message.textContent = outputText;
+}
 
 checkBtn.addEventListener('click', function() {
   const guessNumber = Number(document.querySelector('input').value);
 
     if (!guessNumber) {
-      message.textContent = 'No Number! ⛔';
+      displayInformation('No Number! ⛔');
     } else if (guessNumber === secretNumber) {
-      message.textContent = 'Correct Number! 👍';
+      displayInformation('Correct Number! 👍');
       body.style.backgroundColor = '#60b347';
       myNumber.style.width = '30rem';
       againBtn.style.backgroundColor = 'hotpink';
 
     } else if (guessNumber > 20) {
         if (score > 1) {
-          message.textContent = 'Number Is Out Of Range';
+          displayInformation('Number Is Out Of Range');
           body.style.backgroundColor = 'red';
           score--;
           scoreNumber.textContent = score;
         } else {
-          message.textContent = 'Click On Again To Start A New Game';
+          displayInformation('Click On Again To Start A New Game');
           body.style.backgroundColor = 'red';
           againBtn.style.backgroundColor = 'green';
           scoreNumber.textContent = '0';
@@ -37,23 +41,23 @@ checkBtn.addEventListener('click', function() {
     } else if (guessNumber > secretNumber) {
         if (score > 1) {
           body.style.backgroundColor = '#222';
-          message.textContent = 'Too high 📈';
+          displayInformation('Too high 📈');
           score--;
           scoreNumber.textContent = score;
         } else {
-          message.textContent = 'Click On Again To Start A New Game';
+          displayInformation('Click On Again To Start A New Game');
           body.style.backgroundColor = 'red';
           againBtn.style.backgroundColor = 'green';
           scoreNumber.textContent = '0';
         }
     } else if (guessNumber < secretNumber) {
         if (score > 1) {
+          displayInformation('Too Low 📉');
           body.style.backgroundColor = '#222';
-          message.textContent = 'Too Low 📉';
           score--;
           scoreNumber.textContent = score;
         } else {
-          message.textContent = 'Click On Again To Start A New Game';
+          displayInformation('Click On Again To Start A New Game');
           body.style.backgroundColor = 'red';
           againBtn.style.backgroundColor = 'green';
           scoreNumber.textContent = '0';
